@@ -11,19 +11,5 @@ jobs:
         $python_url = "https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe"
         Invoke-WebRequest -Uri $python_url -OutFile "python-installer.exe"
         .\python-installer.exe /passive /InstallAllUsers=1 /TargetDir="C:\Python" /PrependPath=1 /Upgrade
-        echo "Python installation completed"
-
-
-    - name: Capture screenshot
-      shell: pwsh
-      run: |
-        $screenshot_path = "C:\screenshot.png"
-        Start-Process -FilePath "screencapture" -ArgumentList "-o $screenshot_path"
-        echo "Screenshot captured"
-
-
-    - name: Upload screenshot
-      uses: actions/upload-artifact@v3
-      with:
-        name: screenshot
-        path: C:\screenshot.png
+        $gtx=& py --version
+        write-output $gtx
