@@ -1,6 +1,5 @@
 name: Samplex
-on:
-  workflow_dispatch
+on: workflow_dispatch
 jobs:
   install-python:
     runs-on: windows-latest
