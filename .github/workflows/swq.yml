@@ -7,5 +7,5 @@ jobs:
     - name: list packages
       shell: pwsh
       run: |
-        $gtx=Get-ItemProperty -Path "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*", "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*", "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" |where { $_.DisplayName -ne $null } | Select-Object DisplayName, DisplayVersion, InstallDate
+        $gtx=Get-ItemProperty -Path "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*", "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -ne $null } | Select-Object DisplayName, DisplayVersion, InstallDate
         $gtx
