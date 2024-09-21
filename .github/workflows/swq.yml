@@ -2,13 +2,10 @@ name: Samplex
 on: workflow_dispatch
 jobs:
   install-python:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
-    - name: Install/Upgrade Python
+    - name: list packages
       shell: pwsh
       run: |
-        $python_url = "https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe"
-        Invoke-WebRequest -Uri $python_url -OutFile "python-installer.exe"
-        .\python-installer.exe /passive /InstallAllUsers=1 /TargetDir="C:\Python" /PrependPath=1 /Upgrade
-        $gtx=& py --version
-        write-output $gtx
+        $gtx=Get-ItemProperty -Path "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*", "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*", "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" |where { $_.DisplayName -ne $null } | Select-Object DisplayName, DisplayVersion, InstallDate
+        $gtx
