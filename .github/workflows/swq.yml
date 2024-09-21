@@ -4,6 +4,11 @@ jobs:
   install-python:
     runs-on: windows-2022
     steps:
+    - name : Install excel module
+      shell: pwsh
+      run: |
+        Install-Module -Name ImportExcel -Force
+        get-installedmodule
     - name: list packages
       shell: pwsh
       run: |
