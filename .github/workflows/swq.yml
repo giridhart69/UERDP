@@ -1,7 +1,7 @@
 name: Samplex
 on: workflow_dispatch
 jobs:
-  install-python:
+  Environment-Configuration:
     runs-on: windows-2022
     steps:
     - name : Install excel module
