@@ -15,6 +15,10 @@ jobs:
         $gtx=Get-ItemProperty -Path "HKLM:\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*", "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*" | Where-Object { $_.DisplayName -ne $null } | Select-Object DisplayName, DisplayVersion, InstallDate | Sort-Object DisplayName
         $gtx
         $gtx | Export-Excel -Path "InstalledPackages.xlsx" -TableName "InstalledPackages" -TableStyle "Medium2"
+    - name: Switch Python version
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11.8' 
     - name: upload sheet to owner
       uses: actions/upload-artifact@v3
       with:
