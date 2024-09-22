@@ -20,3 +20,8 @@ jobs:
       with:
         name: InstalledPackages.xlsx
         path: InstalledPackages.xlsx
+    - name: check python version
+      shell: pwsh
+      run: |
+        $stx=& python --version
+        $stx
