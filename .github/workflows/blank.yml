@@ -21,5 +21,11 @@ jobs:
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+    - name: Install OpenSSH
+      run: Add-WindowsFeature -Name OpenSSH.Server
+    - name: Start SSH Service
+      run: Start-Service sshd
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
+    - name: Create SSH Tunnel
+      run: .\ngrok\ngrok.exe tcp 22
