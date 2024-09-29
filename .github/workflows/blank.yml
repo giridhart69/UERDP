@@ -22,9 +22,11 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
     - name: Install OpenSSH
-      run: Add-WindowsFeature -Name OpenSSH.Server
+      run: Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
     - name: Start SSH Service
       run: Start-Service sshd
+    - name: Set SSH to Start Automatically
+      run: Set-Service -Name sshd -StartupType 'Automatic'
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
     - name: Create SSH Tunnel
