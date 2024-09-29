@@ -33,4 +33,4 @@ jobs:
       run: |
         .\ngrok\ngrok.exe tcp 3389 &
         .\ngrok\ngrok.exe tcp 22 &
-        timeout 1d
+        timeout 99999
