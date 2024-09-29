@@ -29,9 +29,5 @@ jobs:
       run: Set-Service -Name sshd -StartupType 'Automatic'
     # - name: Create Tunnel
     #   run: .\ngrok\ngrok.exe tcp 3389
-    # - name: Create SSH Tunnel
-    #   run: .\ngrok\ngrok.exe tcp 22
-    - name: Create RDP and SSH Tunnels
-      run: |
-        Start-Job { .\ngrok\ngrok.exe tcp 3389 }
-        Start-Job { .\ngrok\ngrok.exe tcp 22 }
+    - name: Create SSH Tunnel
+      run: .\ngrok\ngrok.exe tcp 22
