@@ -31,4 +31,6 @@ jobs:
     #   run: .\ngrok\ngrok.exe tcp 22
     - name: Create Tunnel
       run: |
-        ((\ngrok\ngrok.exe tcp 3389) & (\ngrok\ngrok.exe tcp 22)) & tail -f /dev/null
+        .\ngrok\ngrok.exe tcp 3389 &
+        .\ngrok\ngrok.exe tcp 22 &
+        timeout 1d
