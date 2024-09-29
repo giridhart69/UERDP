@@ -1,14 +1,10 @@
 name: Cl
 
-on: [push, workflow_dispatch]
+on: workflow_dispatch
 
 jobs:
   build:
-
     runs-on: windows-latest
-    strategy:
-      matrix:
-        parallel: [true, false]
     steps:
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
@@ -29,8 +25,11 @@ jobs:
       run: Start-Service sshd
     - name: Set SSH to Start Automatically
       run: Set-Service -Name sshd -StartupType 'Automatic'
-    - name: Create SSH Tunnel
-      run: .\ngrok\ngrok.exe tcp 22
-      if: github.matrix.parallel == 'true'
+    # - name: Create Tunnel
+    #   run: .\ngrok\ngrok.exe tcp 3389
+    # - name: Create SSH Tunnel
+    #   run: .\ngrok\ngrok.exe tcp 22
     - name: Create Tunnel
-      run: .\ngrok\ngrok.exe tcp 3389
+      run: |
+        .\ngrok\ngrok.exe tcp 3389 &
+        .\ngrok\ngrok.exe tcp 22 &
